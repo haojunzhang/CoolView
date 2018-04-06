@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/groupBackgroundColor">
 
     <TextView
         android:id="@+id/tv_item_group_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/groupBackgroundColor"
-        android:padding="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/iv_item_group_toggle"
+        android:layout_toStartOf="@+id/iv_item_group_toggle"
+        android:padding="5dp"
         android:textColor="@color/groupTextColor"
-        android:textSize="20sp" />
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/iv_item_group_toggle"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp" />
 </RelativeLayout>

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_item_child_title"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/tv_item_child_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/childBackgroundColor"
-        android:padding="10dp"
-        android:textColor="@color/childTextColor" />
-</RelativeLayout>
+    android:layout_height="wrap_content"
+    android:textColor="@color/childTextColor"
+    android:background="@color/childBackgroundColor"
+    android:layout_gravity="center_vertical"
+    android:paddingBottom="20dp"
+    android:paddingTop="20dp"/>
