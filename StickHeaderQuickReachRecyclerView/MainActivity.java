@@ -75,10 +75,21 @@ public class MainActivity extends AppCompatActivity {
                         true,
                         getSectionCallback(countries)
                 )
-        );
-
+        );     
+		scrollToDefaultPosition();
+    }
+	
+	private void scrollToDefaultPosition() {
         int defaultPosition = getCountryPosition(selectedCode);
         layoutManager.scrollToPositionWithOffset(defaultPosition, isFirstAlphabetPosition(defaultPosition) ? 0 : getResources().getDimensionPixelSize(R.dimen.header));
+    }
+	
+	private void scrollToDefaultPositionV23() {
+        int defaultPosition = getCountryPosition(selectedCode);
+        layoutManager.scrollToPositionWithOffset(defaultPosition, 0);
+        if (!isFirstAlphabetPosition(defaultPosition)){
+            mRecyclerView.smoothScrollBy(0, -getResources().getDimensionPixelSize(R.dimen.header));
+        }
     }
 
     private String getSideListText() {
