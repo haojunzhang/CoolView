@@ -1,0 +1,2 @@
+# SidebarIndicator
+![sc](sc.png)
