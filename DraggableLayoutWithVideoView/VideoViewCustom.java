@@ -2,13 +2,16 @@ package idv.haojun.floatingplayer;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.widget.RelativeLayout;
+import android.util.TypedValue;
 import android.widget.VideoView;
 
 public class VideoViewCustom extends VideoView {
 
     private float floatingScale = 0.75f;
+    private int screenWidth;
+    private int screenHeight;
+    private int statusBarHeight;
+    private int navigationBarHeight;
     private int layoutWidth;
     private int layoutHeight;
     private int floatingLayoutWidth;
@@ -33,8 +36,12 @@ public class VideoViewCustom extends VideoView {
     }
 
     private void initView(Context context) {
-        layoutWidth = getResources().getDisplayMetrics().widthPixels;
-        layoutHeight = (int) (getResources().getDisplayMetrics().density * 200);
+        screenWidth = EnvHelper.getWidthPixels(context);
+        screenHeight = EnvHelper.getHeightPixels(context);
+        statusBarHeight = EnvHelper.getStatusBarHeight(context);
+        navigationBarHeight = EnvHelper.getNavigationBarHeight(context);
+        layoutWidth = screenWidth;
+        layoutHeight = EnvHelper.dpToPx(context, 200);
         floatingLayoutWidth = (int) (layoutWidth * floatingScale);
         floatingLayoutHeight = (int) (layoutHeight * floatingScale);
         setDimensions(layoutWidth, layoutHeight);
@@ -58,5 +65,10 @@ public class VideoViewCustom extends VideoView {
     public void floatingMode() {
         setDimensions(floatingLayoutWidth, floatingLayoutHeight);
         getHolder().setFixedSize(floatingLayoutWidth, floatingLayoutHeight);
+    }
+
+    public void fullscreenMode() {
+        setDimensions(screenHeight + navigationBarHeight, screenWidth);
+        getHolder().setFixedSize(screenHeight + navigationBarHeight, screenWidth);
     }
 }
