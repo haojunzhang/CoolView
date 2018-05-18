@@ -1,4 +1,4 @@
-package idv.haojun.imagepickersample;
+package ryan.idv.imagepicksample;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -8,37 +8,72 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ImagePickActivity extends AppCompatActivity {
 
     public static final int REQUEST_IMAGE_VIEWER = 0;
 
     private RecyclerView rv;
+    private Spinner spinner;
+
+    private List<String> listPath;
+    private List<String> listFolders;
+    private boolean userIsInteracting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_pick);
 
+        spinner = findViewById(R.id.spinner);
         rv = findViewById(R.id.rv);
+
         rv.setLayoutManager(new GridLayoutManager(this, 3));
         rv.setAdapter(new ImagePickRVAdapter());
 
+        spinner.setAdapter(new FolderArrayAdapter());
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userIsInteracting) {
+                    getImages(listFolders.get(position));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         getImages();
+
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        userIsInteracting = true;
     }
 
     private void getImages() {
@@ -55,18 +90,91 @@ public class ImagePickActivity extends AppCompatActivity {
                 new String[]{"image/jpg", "image/jpeg", "image/png", "image/bmp", "image/gif"},
                 MediaStore.Images.Media.DATE_MODIFIED + " desc"
         );
+        if (listFolders == null) {
+            listFolders = new ArrayList<>();
+        } else {
+            listFolders.clear();
+        }
+        listFolders.add("All");
 
         List<String> paths = new ArrayList<>();
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 while (cursor.moveToNext()) {
+
                     paths.add(cursor.getString(0));
+
+                    String folderName = new File(cursor.getString(0)).getParentFile().getName();
+                    if (!listFolders.contains(folderName))
+                        listFolders.add(folderName);
                 }
                 cursor.close();
             }
         }
+        listPath = paths;
 
+        ((FolderArrayAdapter) spinner.getAdapter()).setFolderNames(listFolders);
         ((ImagePickRVAdapter) rv.getAdapter()).setPaths(paths);
+    }
+
+    private void getImages(String folder) {
+        List<String> paths = new ArrayList<>();
+        for (String path : listPath) {
+            if (folder.equals("All") || folder.equals(new File(path).getParentFile().getName())) {
+                paths.add(path);
+            }
+        }
+        ((ImagePickRVAdapter) rv.getAdapter()).setPaths(paths);
+    }
+
+    class FolderArrayAdapter extends BaseAdapter {
+        private List<String> folderNames;
+
+        FolderArrayAdapter() {
+            this.folderNames = new ArrayList<>();
+        }
+
+        void setFolderNames(List<String> folderNames) {
+            this.folderNames = folderNames;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount() {
+            return folderNames.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View v, ViewGroup parent) {
+            ViewHolder holder;
+            if (v == null) {
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_folder, null);
+                holder = new ViewHolder(v);
+                v.setTag(holder);
+            } else {
+                holder = (ViewHolder) v.getTag();
+            }
+            holder.folderName.setText(folderNames.get(position));
+            return v;
+        }
+
+        class ViewHolder {
+            TextView folderName;
+
+            ViewHolder(View v) {
+                folderName = v.findViewById(R.id.tv_item_folder_name);
+            }
+        }
     }
 
     class ImagePickRVAdapter extends RecyclerView.Adapter<ImagePickRVAdapter.ViewHolder> {
