@@ -1,4 +1,4 @@
-package idv.haojun.imagepickersample;
+package ryan.idv.imagepicksample;
 
 import android.Manifest;
 import android.content.Intent;
