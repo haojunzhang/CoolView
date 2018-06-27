@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -100,12 +101,15 @@ public class ImageViewerActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            ImageView imageView = new ImageView(container.getContext());
+            TouchImageView imageView = new TouchImageView(container.getContext());
 
-            Picasso.get()
+            Glide.with(ImageViewerActivity.this)
                     .load(new File(paths.get(position)))
-                    .resize(screenWidth, screenHeight)
-                    .centerInside()
+                    .apply(new RequestOptions()
+                            .override(screenWidth, screenHeight)
+                            .centerInside()
+                            .placeholder(R.drawable.loading)
+                    )
                     .into(imageView);
 
             container.addView(imageView);

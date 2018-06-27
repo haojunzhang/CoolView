@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +19,12 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ImagePickActivity extends AppCompatActivity {
 
@@ -219,11 +217,13 @@ public class ImagePickActivity extends AppCompatActivity {
             }
 
             void setImage(String path) {
-                Picasso.get()
+                Glide.with(ImagePickActivity.this)
                         .load(new File(path))
-                        .resize(imageWidth, imageWidth)
-                        .centerCrop()
-                        .placeholder(R.drawable.loading)
+                        .apply(new RequestOptions()
+                                .override(imageWidth, imageWidth)
+                                .centerCrop()
+                                .placeholder(R.drawable.loading)
+                        )
                         .into(image);
 
                 image.setLayoutParams(new RelativeLayout.LayoutParams(imageWidth, imageWidth));
