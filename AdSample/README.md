@@ -1,17 +1,17 @@
-# SystemUISample
+# AdSample
 
-Hide status bar
+Banner
 
-![hide_status_bar](hide_status_bar.png)
+![sc1](sc1.png)
 
-Hide navigation bar
+Banner
 
-![hide_navigation_bar](hide_navigation_bar.png)
+![sc2](sc2.png)
 
-Hide all
+Interstitial
 
-![hide_all](hide_all.png)
+![sc3](sc3.png)
 
-Show all
+RewardVideo
 
-![show_all](show_all.png)
+![sc4](sc4.png)
