@@ -18,7 +18,10 @@
         </activity>
         <activity android:name=".BannerActivity" />
         <activity android:name=".InterstitialActivity" />
-        <activity android:name=".RewardVideoActivity"></activity>
+        <activity android:name=".RewardVideoActivity" />
+        <activity android:name=".NativeAdActivity" />
+        <activity android:name=".DCBannerActivity" />
+        <activity android:name=".RecyclerViewAdActivity"></activity>
     </application>
 
 </manifest>

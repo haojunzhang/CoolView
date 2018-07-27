@@ -4,6 +4,11 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="admob" />
+
     <Button
         android:id="@+id/bt_banner"
         android:layout_width="match_parent"
@@ -20,5 +25,28 @@
         android:id="@+id/bt_reward_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RewardedVideo" />
+        android:text="Rewarded Video" />
+
+    <Button
+        android:id="@+id/bt_native_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NativeAd" />
+
+    <Button
+        android:id="@+id/bt_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="recyclerview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="doubleclick" />
+
+    <Button
+        android:id="@+id/bt_dc_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="banner" />
 </LinearLayout>

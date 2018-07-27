@@ -5,10 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
@@ -21,8 +17,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt_banner).setOnClickListener(this);
         findViewById(R.id.bt_interstitial).setOnClickListener(this);
         findViewById(R.id.bt_reward_video).setOnClickListener(this);
+        findViewById(R.id.bt_native_ad).setOnClickListener(this);
+        findViewById(R.id.bt_recyclerview).setOnClickListener(this);
 
-
+        findViewById(R.id.bt_dc_banner).setOnClickListener(this);
     }
 
     @Override
@@ -36,6 +34,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_reward_video:
                 startActivity(new Intent(this, RewardVideoActivity.class));
+                break;
+            case R.id.bt_native_ad:
+                startActivity(new Intent(this, NativeAdActivity.class));
+                break;
+            case R.id.bt_recyclerview:
+                startActivity(new Intent(this, RecyclerViewAdActivity.class));
+                break;
+            case R.id.bt_dc_banner:
+                startActivity(new Intent(this, DCBannerActivity.class));
                 break;
         }
     }
