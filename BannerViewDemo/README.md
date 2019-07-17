@@ -1,3 +1,3 @@
 # BannerViewDemo
 ## FakeCircularEndlessRecyclerView
-![sc](sc.png)
+![](sc1.png)
