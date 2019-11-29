@@ -15,3 +15,4 @@ StickHeaderQuickReachRecyclerView | ![](StickHeaderQuickReachRecyclerView/sc1.pn
 StickyGroupExpandableListView | ![](StickyGroupExpandableListView/sc1.png)
 SystemUISample | ![](SystemUISample/hide_all.png)
 TimeLineView | ![](TimeLineView/sc1.png)
+CubeTransFormerViewPager | ![](CubeTransFormerViewPager/sc1.png)
